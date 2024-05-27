@@ -3,7 +3,7 @@ import { User } from '@prisma/client';
 import {
   UsersInjectSymbol,
   UsersRepository,
-} from 'src/repositores/users.repository';
+} from 'src/repositores/user.repository';
 
 @Injectable()
 export class AdminsService {

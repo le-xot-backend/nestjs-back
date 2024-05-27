@@ -4,7 +4,7 @@ import { UsersController } from './users.controller';
 import {
   PrismaUserRepository,
   UsersInjectSymbol,
-} from '../repositores/users.repository';
+} from '../repositores/user.repository';
 import { PrismaModule } from 'src/db/prisma.module';
 
 @Module({

@@ -3,7 +3,7 @@ import { User } from '../repositores/user.entity';
 import {
   UsersInjectSymbol,
   UsersRepository,
-} from '../repositores/users.repository';
+} from '../repositores/user.repository';
 
 @Injectable()
 export class UsersService {

@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import {
   UsersInjectSymbol,
   UsersRepository,
-} from 'src/repositores/users.repository';
+} from 'src/repositores/user.repository';
 
 @Injectable()
 export class AuthService {
