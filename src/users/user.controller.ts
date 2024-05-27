@@ -8,15 +8,15 @@ import {
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { RolesGuard } from 'src/auth/auth.roles.guard';
-import { User, UserRole } from 'src/entities/entity.user';
-import { UserService } from './user.service';
+import { User, UserRole } from '@prisma/client';
+import { UsersService } from './user.service';
 import { UserDecorator } from 'src/auth/auth.user.decorator';
 
 @ApiTags('users')
 @UseGuards(AuthGuard, new RolesGuard([UserRole.USER, UserRole.ADMIN]))
 @Controller('users')
 export class UserController {
-  constructor(private usersService: UserService) {}
+  constructor(private usersService: UsersService) {}
 
   @Get('info')
   @HttpCode(HttpStatus.OK)

@@ -1,0 +1,21 @@
+datasource db {
+    provider = "postgresql"
+    url      = "postgresql://lexot:abc@localhost:5432/NestJsBackDB?schema=public"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id        Int      @id @default(autoincrement())
+    firstname String
+    username  String   @unique
+    password  String
+    role      UserRole
+}
+
+enum UserRole {
+    ADMIN
+    USER
+}

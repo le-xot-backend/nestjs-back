@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserRole } from '../entities/entity.user';
+import { UserRole } from '@prisma/client';
 export class RegisterUserDTO {
   @ApiProperty({ example: 'John' })
   firstname: string;

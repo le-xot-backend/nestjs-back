@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AdminsService } from './admin.service';
-import { User, UserRole } from '../entities/entity.user';
+import { User, UserRole } from '@prisma/client';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { RolesGuard } from 'src/auth/auth.roles.guard';

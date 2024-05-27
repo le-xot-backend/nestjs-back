@@ -1,42 +1,40 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { User } from '../entities/entity.user';
-import { DataSource } from 'typeorm';
+import { User } from '@prisma/client';
+import { PrismaService } from 'src/db/prisma.service';
 
 @Injectable()
 export class AdminsService {
   constructor(
-    @Inject('DATA_SOURCE')
-    private dataSource: DataSource,
+    @Inject(PrismaService)
+    private prisma: PrismaService,
   ) {}
 
   async findOne(username: string): Promise<User> {
-    const usersRepository = this.dataSource.getRepository(User);
-    const user = await usersRepository.findOneBy({ username });
+    const user = await this.prisma.user.findUnique({ where: { username } });
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
     return user;
   }
+
   async deleteUser(username: string): Promise<void> {
-    const usersRepository = this.dataSource.getRepository(User);
-    const users = await usersRepository.delete({ username });
-    if (users.affected === 0) {
+    const user = await this.prisma.user.delete({ where: { username } });
+    if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
-    return;
   }
+
   async findAll(): Promise<User[]> {
-    const usersRepository = this.dataSource.getRepository(User);
-    const users = await usersRepository.find();
-    if (users.length === 0) {
+    const users = await this.prisma.user.findMany();
+    if (!users || users.length === 0) {
       throw new HttpException('Users not found', HttpStatus.NOT_FOUND);
     }
     return users;
   }
+
   async deleteAll(): Promise<void> {
-    const usersRepository = this.dataSource.getRepository(User);
-    const users = await usersRepository.delete({});
-    if (users.affected === 0) {
+    const users = await this.prisma.user.deleteMany();
+    if (!users || users.count === 0) {
       throw new HttpException('Users not found', HttpStatus.NOT_FOUND);
     }
   }
