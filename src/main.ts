@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import cookieParser from 'cookie-parser';
+import { environments } from './environment';
 
 declare const module: any;
 
@@ -15,7 +16,7 @@ async function bootstrap() {
     customCss: `.swagger-ui .topbar { display: none } .version { display: none } .swagger-ui .info .title small.version-stamp { display: none } .swagger-ui .info .title small { display: none }`,
   });
 
-  await app.listen(3000);
+  await app.listen(environments.port);
 
   if (module.hot) {
     module.hot.accept();

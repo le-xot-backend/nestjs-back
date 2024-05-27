@@ -1,6 +1,6 @@
 datasource db {
     provider = "postgresql"
-    url      = "postgresql://lexot:abc@localhost:5432/NestJsBackDB?schema=public"
+    url      = env("DATASOURSE_URL")
 }
 
 generator client {
