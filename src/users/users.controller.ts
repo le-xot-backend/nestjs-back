@@ -8,7 +8,8 @@ import {
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { RolesGuard } from 'src/auth/auth.roles.guard';
-import { User, UserRole } from '@prisma/client';
+import { User } from '../repositores/user.entity';
+import { UserRole } from '../repositores/user.entity.roles';
 import { UsersService } from './users.service';
 import { UserDecorator } from 'src/auth/auth.user.decorator';
 
