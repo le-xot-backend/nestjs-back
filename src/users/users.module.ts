@@ -6,9 +6,10 @@ import {
   UsersInjectSymbol,
 } from '../repositores/user.repository';
 import { PrismaModule } from 'src/db/prisma.module';
+import { CustomJwtModule } from 'src/jwt/jwt.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [CustomJwtModule, PrismaModule],
   providers: [
     { provide: UsersInjectSymbol, useClass: PrismaUserRepository },
     UsersService,
