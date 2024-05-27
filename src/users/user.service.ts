@@ -1,13 +1,18 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { User } from '@prisma/client';
-import { PrismaService } from 'src/db/prisma.service';
+import { User } from '../repositores/user.entity';
+import {
+  UserInjectSymbol,
+  UserRepository,
+} from '../repositores/users.repository';
 
 @Injectable()
 export class UsersService {
-  constructor(@Inject(PrismaService) private prisma: PrismaService) {}
+  constructor(
+    @Inject(UserInjectSymbol) private userRepository: UserRepository,
+  ) {}
 
   async returnUserInfo(username: string): Promise<User> {
-    const user = await this.prisma.user.findUnique({ where: { username } });
+    const user = await this.userRepository.findByUsername(username);
     if (!user) {
       throw new HttpException('Info not found', HttpStatus.NOT_FOUND);
     }

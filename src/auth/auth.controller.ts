@@ -47,10 +47,10 @@ export class AuthController {
     });
     return token;
   }
-  @Post('quit')
+  @Post('logout')
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: HttpStatus.OK, description: 'User logged out' })
-  async quit(@Res({ passthrough: true }) response: Response): Promise<void> {
+  async logout(@Res({ passthrough: true }) response: Response): Promise<void> {
     response.clearCookie('token');
   }
 }
