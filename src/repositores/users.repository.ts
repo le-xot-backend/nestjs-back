@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { UserRole } from './user.entity.roles';
 
 @Injectable()
-export class PrismaUserRepository implements UserRepository {
+export class PrismaUserRepository implements UsersRepository {
   constructor(private prisma: PrismaService) {}
 
   private convertUser(user: PrismaUser): User {
@@ -40,9 +40,9 @@ export class PrismaUserRepository implements UserRepository {
   }
 }
 
-export const UserInjectSymbol = Symbol();
+export const UsersInjectSymbol = Symbol();
 
-export interface UserRepository {
+export interface UsersRepository {
   createUser(user: Omit<User, 'id'>): Promise<User>;
   findByUsername(username: string): Promise<User | null>;
   deleteUser(username: string): Promise<void>;

@@ -3,15 +3,15 @@ import { UserRole } from '../repositores/user.entity.roles';
 import { JwtService } from '@nestjs/jwt';
 import bcrypt from 'bcrypt';
 import {
-  UserInjectSymbol,
-  UserRepository,
+  UsersInjectSymbol,
+  UsersRepository,
 } from 'src/repositores/users.repository';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject(UserInjectSymbol)
-    private userRepository: UserRepository,
+    @Inject(UsersInjectSymbol)
+    private usersRepository: UsersRepository,
     private jwtService: JwtService,
   ) {}
 
@@ -23,7 +23,7 @@ export class AuthService {
   ): Promise<void> {
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const existingUser = await this.userRepository.findByUsername(username);
+    const existingUser = await this.usersRepository.findByUsername(username);
     if (existingUser) {
       throw new HttpException(
         'User with username already exists',
@@ -31,7 +31,7 @@ export class AuthService {
       );
     }
 
-    await this.userRepository.createUser({
+    await this.usersRepository.createUser({
       firstname,
       username,
       password: hashedPassword,
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   async login(username: string, password: string): Promise<string> {
-    const user = await this.userRepository.findByUsername(username);
+    const user = await this.usersRepository.findByUsername(username);
 
     if (!user) {
       throw new HttpException(

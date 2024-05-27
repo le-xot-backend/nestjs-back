@@ -1,18 +1,18 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { User } from '../repositores/user.entity';
 import {
-  UserInjectSymbol,
-  UserRepository,
+  UsersInjectSymbol,
+  UsersRepository,
 } from '../repositores/users.repository';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(UserInjectSymbol) private userRepository: UserRepository,
+    @Inject(UsersInjectSymbol) private usersRepository: UsersRepository,
   ) {}
 
   async returnUserInfo(username: string): Promise<User> {
-    const user = await this.userRepository.findByUsername(username);
+    const user = await this.usersRepository.findByUsername(username);
     if (!user) {
       throw new HttpException('Info not found', HttpStatus.NOT_FOUND);
     }

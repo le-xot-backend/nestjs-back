@@ -9,13 +9,13 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { RolesGuard } from 'src/auth/auth.roles.guard';
 import { User, UserRole } from '@prisma/client';
-import { UsersService } from './user.service';
+import { UsersService } from './users.service';
 import { UserDecorator } from 'src/auth/auth.user.decorator';
 
 @ApiTags('users')
 @UseGuards(AuthGuard, new RolesGuard([UserRole.USER, UserRole.ADMIN]))
 @Controller('users')
-export class UserController {
+export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get('info')
