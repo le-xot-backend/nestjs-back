@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { UserRole } from '../repositores/user.entity.roles';
-
 import bcrypt from 'bcrypt';
 import {
   UsersInjectSymbol,
