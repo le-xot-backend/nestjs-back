@@ -4,6 +4,7 @@ import {
   UsersInjectSymbol,
   UsersRepository,
 } from 'src/repositores/user.repository';
+import { UserRole } from 'src/repositores/user.entity.roles';
 
 @Injectable()
 export class AdminsService {
@@ -36,11 +37,11 @@ export class AdminsService {
     return foundedUsers;
   }
 
-  async deleteAll(): Promise<void> {
+  async deleteAll(role?: UserRole): Promise<void> {
     const deletedUsers = await this.usersRepository.findAll();
     if (!deletedUsers) {
       throw new HttpException('Users not found', HttpStatus.NOT_FOUND);
     }
-    await this.usersRepository.deleteAll();
+    await this.usersRepository.deleteAll(role);
   }
 }

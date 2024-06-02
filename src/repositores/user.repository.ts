@@ -1,4 +1,5 @@
 import { User } from './user.entity';
+import { UserRole } from './user.entity.roles';
 
 export const UsersInjectSymbol = Symbol();
 
@@ -7,5 +8,5 @@ export interface UsersRepository {
   findByUsername(username: string): Promise<User | null>;
   deleteUser(username: string): Promise<void>;
   findAll(): Promise<User[]>;
-  deleteAll(): Promise<void>;
+  deleteAll(role?: UserRole): Promise<void>;
 }

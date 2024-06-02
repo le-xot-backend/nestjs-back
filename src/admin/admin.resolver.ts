@@ -42,12 +42,12 @@ export class AdminResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteAll(): Promise<boolean> {
+  async deleteAll(@Args('role') role?: UserRole): Promise<boolean> {
     const deletedUsers = await this.usersRepository.findAll();
     if (!deletedUsers) {
       throw new HttpException('Users not found', HttpStatus.NOT_FOUND);
     }
-    await this.usersRepository.deleteAll();
+    await this.usersRepository.deleteAll(role);
     return true;
   }
 }

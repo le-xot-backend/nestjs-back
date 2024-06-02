@@ -9,7 +9,7 @@ extend type Query {
 
 type Mutation {
   deleteUser(username: String!): Boolean
-  deleteAll: Boolean
+  deleteAll(role: UserRole): Boolean
   register(input: Register!): Boolean
   login(input: Login!): String!
   logout: Boolean

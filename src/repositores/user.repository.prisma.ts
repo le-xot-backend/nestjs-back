@@ -36,7 +36,13 @@ export class PrismaUserRepository implements UsersRepository {
     await this.prisma.user.delete({ where: { username } });
   }
 
-  async deleteAll(): Promise<void> {
-    await this.prisma.user.deleteMany();
+  async deleteAll(role?: UserRole): Promise<void> {
+    const where = {};
+
+    if (role) {
+      where['role'] = role;
+    }
+
+    await this.prisma.user.deleteMany({ where });
   }
 }
