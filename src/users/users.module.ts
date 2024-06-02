@@ -7,12 +7,14 @@ import {
 } from '../repositores/user.repository';
 import { PrismaModule } from 'src/db/prisma.module';
 import { CustomJwtModule } from 'src/jwt/jwt.module';
+import { UsersResolver } from './users.resolver';
 
 @Module({
   imports: [CustomJwtModule, PrismaModule],
   providers: [
     { provide: UsersInjectSymbol, useClass: PrismaUserRepository },
     UsersService,
+    UsersResolver,
   ],
   controllers: [UsersController],
   exports: [UsersInjectSymbol],
