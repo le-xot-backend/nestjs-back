@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuthLoggerRepository } from './logger.repository';
+import { AuthLoggerRepository } from './authLogger.repository';
 import { PrismaService } from 'src/db/prisma.service';
 
 @Injectable()

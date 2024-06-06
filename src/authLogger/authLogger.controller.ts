@@ -3,7 +3,7 @@ import { EventPattern } from '@nestjs/microservices';
 import {
   AuthLoggerRepository,
   LoggerInjectSymbol,
-} from './repositories/logger.repository';
+} from './repositories/authLogger.repository';
 
 @Controller('logger')
 export class AuthLoggerController {

@@ -3,7 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 import cookieParser from 'cookie-parser';
 import { environments } from './utils/environment';
-import { AuthLoggerModule } from './logger/authLogger.module';
+import { AuthLoggerModule } from './authLogger/authLogger.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
