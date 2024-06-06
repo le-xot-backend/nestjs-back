@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { environments } from 'src/environment';
+import { environments } from 'src/utils/environment';
 
 const RegisteredJwtModule = JwtModule.register({
   secret: environments.jwtSecret,

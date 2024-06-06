@@ -1,5 +1,5 @@
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
-import { Login, Register } from 'src/graphql';
+import { Login, Register } from 'src/app/graphql';
 import { AuthService } from './auth.service';
 import { Response } from 'express';
 

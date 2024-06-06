@@ -7,7 +7,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { RegisterUserDTO, LoginUserDTO } from 'src/auth/auth.dtos';
+import { RegisterUserDTO, LoginUserDTO } from 'src/app/auth/auth.dtos';
 import { AuthService } from './auth.service';
 import { Response } from 'express';
 

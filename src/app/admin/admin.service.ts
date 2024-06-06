@@ -3,8 +3,8 @@ import { User } from '../repositores/user.entity';
 import {
   UsersInjectSymbol,
   UsersRepository,
-} from 'src/repositores/user.repository';
-import { UserRole } from 'src/repositores/user.entity.roles';
+} from 'src/app/repositores/user.repository';
+import { UserRole } from 'src/app/repositores/user.entity.roles';
 
 @Injectable()
 export class AdminsService {

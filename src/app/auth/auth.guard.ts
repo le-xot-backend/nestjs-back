@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { environments } from '../environment';
+import { environments } from '../../utils/environment';
 import { GqlContextType, GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()

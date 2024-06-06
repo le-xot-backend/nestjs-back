@@ -6,14 +6,14 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Query, Resolver } from '@nestjs/graphql';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { UserDecorator } from 'src/auth/auth.user.decorator';
-import { User } from 'src/graphql';
+import { AuthGuard } from 'src/app/auth/auth.guard';
+import { UserDecorator } from 'src/app/auth/auth.user.decorator';
+import { User } from 'src/app/graphql';
 
 import {
   UsersInjectSymbol,
   UsersRepository,
-} from 'src/repositores/user.repository';
+} from 'src/app/repositores/user.repository';
 
 @UseGuards(AuthGuard)
 @Resolver()

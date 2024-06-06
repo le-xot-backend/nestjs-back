@@ -12,8 +12,8 @@ import { AdminsService } from './admin.service';
 import { User } from '../repositores/user.entity';
 import { UserRole } from '../repositores/user.entity.roles';
 import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { RolesGuard } from 'src/auth/auth.roles.guard';
+import { AuthGuard } from 'src/app/auth/auth.guard';
+import { RolesGuard } from 'src/app/auth/auth.roles.guard';
 
 @ApiTags('admin')
 @UseGuards(AuthGuard, new RolesGuard([UserRole.ADMIN]))

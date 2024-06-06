@@ -1,13 +1,13 @@
 import { HttpException, HttpStatus, Inject, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { RolesGuard } from 'src/auth/auth.roles.guard';
-import { User as QueryUser, User, UserRole } from 'src/graphql';
+import { AuthGuard } from 'src/app/auth/auth.guard';
+import { RolesGuard } from 'src/app/auth/auth.roles.guard';
+import { User as QueryUser, User, UserRole } from 'src/app/graphql';
 
 import {
   UsersInjectSymbol,
   UsersRepository,
-} from 'src/repositores/user.repository';
+} from 'src/app/repositores/user.repository';
 
 @UseGuards(AuthGuard, new RolesGuard([UserRole.ADMIN]))
 @Resolver()
