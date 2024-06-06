@@ -3,6 +3,7 @@ import { User } from './user.entity';
 import { User as PrismaUser } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
 import { UserRole } from './user.entity.roles';
+import { UsersRepository } from './user.repository';
 
 @Injectable()
 export class PrismaUserRepository implements UsersRepository {
@@ -35,17 +36,13 @@ export class PrismaUserRepository implements UsersRepository {
     await this.prisma.user.delete({ where: { username } });
   }
 
-  async deleteAll(): Promise<void> {
-    await this.prisma.user.deleteMany();
+  async deleteAll(role?: UserRole): Promise<void> {
+    const where = {};
+
+    if (role) {
+      where['role'] = role;
+    }
+
+    await this.prisma.user.deleteMany({ where });
   }
-}
-
-export const UsersInjectSymbol = Symbol();
-
-export interface UsersRepository {
-  createUser(user: Omit<User, 'id'>): Promise<User>;
-  findByUsername(username: string): Promise<User | null>;
-  deleteUser(username: string): Promise<void>;
-  findAll(): Promise<User[]>;
-  deleteAll(): Promise<void>;
 }

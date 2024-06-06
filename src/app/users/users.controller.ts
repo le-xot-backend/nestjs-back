@@ -6,10 +6,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from 'src/app/auth/auth.guard';
 import { User } from '../repositores/user.entity';
 import { UsersService } from './users.service';
-import { UserDecorator } from 'src/auth/auth.user.decorator';
+import { UserDecorator } from 'src/app/auth/auth.user.decorator';
 
 @ApiTags('users')
 @UseGuards(AuthGuard)

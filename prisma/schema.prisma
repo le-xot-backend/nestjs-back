@@ -8,11 +8,19 @@ generator client {
 }
 
 model User {
-    id        Int      @id @default(autoincrement())
-    firstname String
-    username  String   @unique
-    password  String
-    role      UserRole
+    id         Int          @id @default(autoincrement())
+    firstname  String
+    username   String       @unique
+    password   String
+    role       UserRole
+    AuthLogger AuthLogger[]
+}
+
+model AuthLogger {
+    id     Int      @id @default(autoincrement())
+    user   User     @relation(fields: [userId], references: [id])
+    userId Int
+    time   DateTime @default(now())
 }
 
 enum UserRole {

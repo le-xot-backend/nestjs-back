@@ -1,12 +1,13 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { UserRole } from '../repositores/user.entity.roles';
-
 import bcrypt from 'bcrypt';
 import {
   UsersInjectSymbol,
   UsersRepository,
-} from 'src/repositores/user.repository';
+} from 'src/app/repositores/user.repository';
 import { JwtService } from '@nestjs/jwt';
+import { LoggerMicroserviceSymbol } from './auth.constants';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +15,7 @@ export class AuthService {
     @Inject(UsersInjectSymbol)
     private usersRepository: UsersRepository,
     private jwtService: JwtService,
+    @Inject(LoggerMicroserviceSymbol) private client: ClientProxy,
   ) {}
 
   async registerUser(
@@ -60,6 +62,8 @@ export class AuthService {
     }
 
     const { password: _, ...payload } = user;
+
+    this.client.emit('new-login', payload.id);
 
     return await this.jwtService.signAsync(payload);
   }

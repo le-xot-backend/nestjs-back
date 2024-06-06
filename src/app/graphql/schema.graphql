@@ -1,0 +1,41 @@
+type Query {
+  me: User!
+}
+
+extend type Query {
+  user(username: String!): User!
+  users: [User!]!
+}
+
+type Mutation {
+  deleteUser(username: String!): Boolean
+  deleteAll(role: UserRole): Boolean
+  register(input: Register!): Boolean
+  login(input: Login!): String!
+  logout: Boolean
+}
+
+input Register {
+  firstname: String!
+  username: String!
+  password: String!
+  role: UserRole!
+}
+
+input Login {
+  username: String!
+  password: String!
+}
+
+type User {
+  id: Int
+  firstname: String
+  username: String
+  password: String
+  role: UserRole
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}

@@ -1,19 +1,19 @@
 import {
   Controller,
   Get,
-  Query,
   Delete,
   Param,
   HttpCode,
   HttpStatus,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { AdminsService } from './admin.service';
 import { User } from '../repositores/user.entity';
 import { UserRole } from '../repositores/user.entity.roles';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { RolesGuard } from 'src/auth/auth.roles.guard';
+import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/app/auth/auth.guard';
+import { RolesGuard } from 'src/app/auth/auth.roles.guard';
 
 @ApiTags('admin')
 @UseGuards(AuthGuard, new RolesGuard([UserRole.ADMIN]))
@@ -31,12 +31,13 @@ export class AdminController {
   }
 
   @Delete()
+  @ApiQuery({ name: 'role', enum: UserRole, required: false })
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: HttpStatus.OK, description: 'Users deleted' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Users not found' })
-  async deleteAll(): Promise<void> {
-    return this.adminsService.deleteAll();
+  async deleteAll(@Query('role') role?: UserRole): Promise<void> {
+    return this.adminsService.deleteAll(role);
   }
 
   @Get(':username')
@@ -53,7 +54,7 @@ export class AdminController {
   @ApiResponse({ status: HttpStatus.OK, description: 'User deleted' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
-  async deleteUser(@Query('username') username: string): Promise<void> {
+  async deleteUser(@Param('username') username: string): Promise<void> {
     return this.adminsService.deleteUser(username);
   }
 }
